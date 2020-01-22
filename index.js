@@ -89,7 +89,7 @@ module.exports = {
    * @return {Array} Broccoli vendor tree
    */
   treeForVendor(vendorTree) {
-    if (this.env === 'production' || this.env === 'test') { return vendorTree; }
+    if (this.env === 'production') { return vendorTree; }
 
     const tree = [];
     if (vendorTree) { tree.push(vendorTree); }
