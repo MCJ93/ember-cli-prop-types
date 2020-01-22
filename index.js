@@ -54,6 +54,7 @@ module.exports = {
     this.addonOptions = addonOptions;
 
     // In production strip out features that are disabled
+    console.log(this.env);
     if ((this.env === 'production' || this.env === 'test') && addonOptions.compress) {
       app.options.minifyJS = app.options.minifyJS || {};
       app.options.minifyJS.options = app.options.minifyJS.options || {};
