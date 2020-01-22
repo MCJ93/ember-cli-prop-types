@@ -54,7 +54,7 @@ module.exports = {
     this.addonOptions = addonOptions;
 
     // In production strip out features that are disabled
-    if (this.env === 'production' && addonOptions.compress) {
+    if ((this.env === 'production' || this.env === 'test') && addonOptions.compress) {
       app.options.minifyJS = app.options.minifyJS || {};
       app.options.minifyJS.options = app.options.minifyJS.options || {};
       let minifyOpts = app.options.minifyJS.options;
@@ -69,7 +69,7 @@ module.exports = {
 
     // Import the prop-types library only in dev builds. In prod builds import the
     // prod shims so import statements don't throw
-    if (this.env !== 'production') {
+    if (this.env !== 'production' || this.env === 'test') {
       app.import(`${vendor}/prop-types/prop-types.js`, {
         using: [
           { transformation: 'amd', as: 'prop-types' }
@@ -89,7 +89,7 @@ module.exports = {
    * @return {Array} Broccoli vendor tree
    */
   treeForVendor(vendorTree) {
-    if (this.env === 'production') { return vendorTree; }
+    if (this.env === 'production' || this.env === 'test') { return vendorTree; }
 
     const tree = [];
     if (vendorTree) { tree.push(vendorTree); }
